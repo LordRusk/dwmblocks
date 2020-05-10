@@ -14,7 +14,9 @@ typedef struct {
 	unsigned int signal;
 } Block;
 void sighandler(int num);
+void buttonhandler(int sig, siginfo_t *si, void *ucontext);
 void replace(char *str, char old, char new);
+void remove_all(char *str, char to_remove);
 void getcmds(int time);
 #ifndef __OpenBSD__
 void getsigcmds(int signal);
@@ -45,9 +47,27 @@ void replace(char *str, char old, char new)
 			str[i] = new;
 }
 
+void remove_all(char *str, char to_remove) {
+	char *read = str;
+	char *write = str;
+	while (*read) {
+		if (*read == to_remove) {
+			read++;
+			*write = *read;
+		}
+		read++;
+		write++;
+	}
+}
+
 //opens process *cmd and stores output in *output
 void getcmd(const Block *block, char *output)
 {
+	if (block->signal)
+	{
+		output[0] = block->signal;
+		output++;
+	}
 	strcpy(output, block->icon);
 	char *cmd = block->command;
 	FILE *cmdf = popen(cmd,"r");
@@ -56,8 +76,9 @@ void getcmd(const Block *block, char *output)
 	char c;
 	int i = strlen(block->icon);
 	fgets(output+i, CMDLENGTH-i, cmdf);
+	remove_all(output, '\n');
 	i = strlen(output);
-	if (delim != '\0' && --i)
+	if (delim != '\0' && i)
 		output[i++] = delim;
 	output[i++] = '\0';
 	pclose(cmdf);
@@ -67,7 +88,7 @@ void getcmds(int time)
 {
 	const Block* current;
 	for(int i = 0; i < LENGTH(blocks); i++)
-	{	
+	{
 		current = blocks + i;
 		if ((current->interval != 0 && time % current->interval == 0) || time == -1)
 			getcmd(current,statusbar[i]);
@@ -88,11 +109,19 @@ void getsigcmds(int signal)
 
 void setupsignals()
 {
+	struct sigaction sa;
 	for(int i = 0; i < LENGTH(blocks); i++)
-	{	  
+	{
 		if (blocks[i].signal > 0)
+		{
 			signal(SIGRTMIN+blocks[i].signal, sighandler);
+			sigaddset(&sa.sa_mask, SIGRTMIN+blocks[i].signal);
+		}
 	}
+	sa.sa_sigaction = buttonhandler;
+	sa.sa_flags = SA_SIGINFO;
+	sigaction(SIGUSR1, &sa, NULL);
+	signal(SIGCHLD, SIG_IGN);
 
 }
 #endif
@@ -152,6 +181,34 @@ void sighandler(int signum)
 	getsigcmds(signum-SIGRTMIN);
 	writestatus();
 }
+
+void buttonhandler(int sig, siginfo_t *si, void *ucontext)
+{
+	int button = si->si_value.sival_int & 0xff;
+	sig = si->si_value.sival_int >> 8;
+	getsigcmds(sig);
+	writestatus();
+	if (fork() == 0)
+	{
+		static char exportstring[CMDLENGTH + 22] = "export BLOCK_BUTTON=-;";
+		const Block *current;
+		int i;
+		for (i = 0; i < LENGTH(blocks); i++)
+		{
+			current = blocks + i;
+			if (current->signal == sig)
+				break;
+		}
+		char *cmd = strcat(exportstring, blocks[i].command);
+		cmd[20] = '0' + button;
+		char *command[] = { "/bin/sh", "-c", cmd, NULL };
+		setsid();
+		execvp(command[0], command);
+		exit(EXIT_SUCCESS);
+		cmd[22] = '\0';
+	}
+}
+
 #endif
 
 void termhandler(int signum)
@@ -163,7 +220,7 @@ void termhandler(int signum)
 int main(int argc, char** argv)
 {
 	for(int i = 0; i < argc; i++)
-	{	
+	{
 		if (!strcmp("-d",argv[i]))
 			delim = argv[++i][0];
 		else if(!strcmp("-p",argv[i]))
