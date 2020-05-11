@@ -22,3 +22,23 @@ static const Block blocks[] = {
 
 //sets delimeter between status commands. NULL character ('\0') means no delimeter.
 static char delim = '|';
+
+/* Quick list of modules Update Signals
+ * 1 clock
+ * 2
+ * 3 battery
+ * 4 internet
+ * 5 weather
+ * 6 news
+ * 7 torrent
+ * 8 pacpackages
+ * 9 moonphase
+ * 10 volume
+ * 11 music
+ * 12 mailbox
+ * 13 cpu
+ * 14 memory
+ * 15 help-icon
+ * 16 nettraf
+ * 17 crypto
+ */
