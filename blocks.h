@@ -5,7 +5,8 @@ static const Block blocks[] = {
 	{"",		"music",			0,			11},
 	{"",		"pacpackages",			0,			8},
 	{"",		"news",				0,			6},
-	{"",		"crypto",			0,			13},
+	{"",		"crypto",			18000,			13},
+	{"",		"NULL",				0,			0},
 	{"",		"torrent",			20,			7},
 	{"",		"memory",			10,			14},
 	{"",		"cpu",				10,			13},
@@ -23,6 +24,7 @@ static const Block blocks[] = {
 static char delim = '|';
 
 /* Quick list of modules Update Signals
+ * 0 NULL
  * 1 clock
  * 2
  * 3 battery
