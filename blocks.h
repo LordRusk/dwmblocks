@@ -10,7 +10,7 @@ static const Block blocks[] = {
 	{"",		"torrent",			20,			7},
 	{"",		"memory",			10,			14},
 	{"",		"cpu",				10,			13},
-	{"",		"moonphase",			18000,			15},
+	{"",		"astrological",			18000,			15},
 	{"",		"weather",			18000,			5},
 	{"",		"mailbox",			180,			12},
 	{"",		"nettraf",			1,			16},
@@ -39,7 +39,7 @@ static char delim = '|';
  * 12 mailbox
  * 13 cpu
  * 14 memory
- * 15 moonphase
+ * 15 astrological
  * 16 nettraf
  * 17 crypto
  */
