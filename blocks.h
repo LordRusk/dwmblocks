@@ -13,7 +13,7 @@ static const Block blocks[] = {
 	{"",		"disk",				10,			15},
 	{"",		"astrological",			18000,			18},
 	{"",		"weather",			18000,			5},
-	{"",		"mailbox",			180,			12},
+	{"",		"mailbox",			0,			12},
 	{"",		"nettraf",			1,			16},
 	{"",		"volume",			0,			10},
 	{"",		"battery",			5,			3},
