@@ -8,7 +8,8 @@ I have dwmblocks read my preexisting scripts [here in my dotfiles repo](https://
 So if you want my build out of the box, download those and put them in your `$PATH`.
 # signalling changes
 For example, the audio module has the update signal 10 by default.
-Thus, running `pkill -RTMIN+10 dwmblocks` will update it.
+Thus, running `kill -$((34+10)) $(pidof dwmblocks)` will update it. 
+
 # clickable modules
 Like i3blocks, this build allows you to build in additional actions into your scripts in response to click events.
 See the above linked scripts for examples of this using the `$BLOCK_BUTTON` variable.
