@@ -18,6 +18,7 @@ static const Block blocks[] = {
 	{"",		"volume",			0,			10},
 	{"",		"battery",			5,			3},
 	{"",		"clock",			0,			1},
+	{"",		"iplocate",			10			2},
 	{"",		"internet",			5,			4},
 };
 
@@ -27,7 +28,7 @@ static char delim = '|';
 /* Quick list of modules Update Signals
  * 0 NULL
  * 1 clock
- * 2
+ * 2 iplocate
  * 3 battery
  * 4 internet
  * 5 weather
