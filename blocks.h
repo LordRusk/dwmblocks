@@ -18,17 +18,17 @@ static const Block blocks[] = {
 	{"",		"volume",			0,			10},
 	{"",		"battery",			5,			3},
 	{"",		"clock",			0,			1},
-	{"",		"iplocate",			10			2},
+	{"",		"sip",				10			2},
 	{"",		"internet",			5,			4},
 };
 
 //sets delimeter between status commands. NULL character ('\0') means no delimeter.
-static char delim = '|';
+static char delim = ' ';
 
 /* Quick list of modules Update Signals
  * 0 NULL
  * 1 clock
- * 2 iplocate
+ * 2 sip
  * 3 battery
  * 4 internet
  * 5 weather
