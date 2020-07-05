@@ -19,6 +19,7 @@ static const Block blocks[] = {
 	{"",		"battery",			5,			3},
 	{"",		"clock",			0,			1},
 	{"",		"sip",				10,			2},
+	{"",		"vpnstat",			30,			21},
 	{"",		"internet",			5,			4},
 	{"",		"help-icon",			0,			20},
 };
@@ -47,4 +48,5 @@ static char *delim = " ";
  * 18 astrological
  * 19 georona
  * 20 help-icon
+ * 21 vpnstat
  */
