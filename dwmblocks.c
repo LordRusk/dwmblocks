@@ -78,9 +78,7 @@ void getcmd(const Block *block, char *output)
 	fgets(output+i, CMDLENGTH-(strlen(delim)+1), cmdf);
 	remove_all(output, '\n');
 	i = strlen(output);
-	if ((i > 0 && block != &blocks[LENGTH(blocks) - 1]))
-        	strcat(output, delim);
-	i+=strlen(delim);
+	signal(SIGCHLD, SIG_IGN);
 	output[i++] = '\0';
 	pclose(cmdf);
 }
