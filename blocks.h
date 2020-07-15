@@ -10,6 +10,7 @@ static const Block blocks[] = {
 	{"",		"torrent",			20,			7},
 	{"",		"memory",			10,			14},
 	{"",		"cpu",				10,			13},
+	{"",		"cpubars",			10,			22},
 	{"",		"disk",				10,			15},
 	{"",		"astrological",			18000,			18},
 	{"",		"weather",			18000,			5},
@@ -49,4 +50,5 @@ static char *delim = " ";
  * 19 georona
  * 20 help-icon
  * 21 vpnstat
+ * 22 cpubar
  */
