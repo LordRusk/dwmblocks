@@ -78,7 +78,9 @@ void getcmd(const Block *block, char *output)
 	fgets(output+i, CMDLENGTH-(strlen(delim)+1), cmdf);
 	remove_all(output, '\n');
 	i = strlen(output);
-	signal(SIGCHLD, SIG_IGN);
+	if ((i > 0 && block != &blocks[LENGTH(blocks) - 1]))
+        	strcat(output, delim);
+	i+=strlen(delim);
 	output[i++] = '\0';
 	pclose(cmdf);
 }
@@ -119,13 +121,7 @@ void setupsignals()
 	}
 	sa.sa_sigaction = buttonhandler;
 	sa.sa_flags = SA_SIGINFO;
-	sigaction(SIGUSR1, &sa, NULL);
-	struct sigaction sigchld_action = {
-   		.sa_handler = SIG_DFL,
-   		.sa_flags = SA_NOCLDWAIT
- 	};
- 	sigaction(SIGCHLD, &sigchld_action, NULL);
-
+	signal(SIGCHLD, SIG_IGN);
 }
 #endif
 
