@@ -121,6 +121,7 @@ void setupsignals()
 	}
 	sa.sa_sigaction = buttonhandler;
 	sa.sa_flags = SA_SIGINFO;
+	sigaction(SIGUSR1, &sa, NULL);
 	signal(SIGCHLD, SIG_IGN);
 }
 #endif
