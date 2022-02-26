@@ -1,7 +1,7 @@
 # NOTICE
 This program is poorly written, there is many errors that you will find that simply cannot be solved without extensive knowledge of C that nobody else is experiencing. This desperately needs a rewrite. PLEASE REWRITE THIS IN C OR GO I'M BEGGING YOU!!
 
-edit: It's been a while since I wrote this comment. Though the project has grown immensly and probably doesn't have the errors and problems it did 2 years ago, the project is still massive for a statusbar. If you want what you were originally looking for with dwmblocks, what I was looking for 2 years ago, I made it. [Gocaudices](https://github.com/lordrusk/gocaudices): A fast dwmblocks alternative written in go in less than 100 SLOC, currently at 85 SLOC. Though lacking some patches which the modern wave of suck(less)ers *just can't live without*, like bar clickability. I'm working on a standalone clickability patch or contributing to /x/ in order to get access to `siginfo_t *si` which is currently unexported and unusable. For those wondering, this is why I havent created a clickability patch for [statuscmd](https://dwm.suckless.org/patches/statuscmd). See [#9764](https://github.com/golang/go/issues/9764)
+edit: It's been a while since I wrote this comment. Though the project has grown immensly and probably doesn't have the errors and problems it did 2 years ago, the project is still massive for a statusbar. If you want what you were originally looking for with dwmblocks, what I was looking for 2 years ago, I made it. [Gocaudices](https://github.com/lordrusk/gocaudices): A fast dwmblocks alternative written in go in less than 100 SLOC, currently at 85 SLOC.
 
 # dwmblocks
 Modular status bar for dwm written in c.
